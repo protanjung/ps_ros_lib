@@ -1,0 +1,5 @@
+string node_namespace
+string node_name
+string log_datetime
+string log_header
+string log_body
