@@ -1,0 +1,7 @@
+<launch>
+    <arg name="log_path" default="$(env HOME)/ps_ros_lib/log" />
+
+    <node pkg="ps_ros_lib" type="log" name="log" output="screen">
+        <param name="path" value="$(arg log_path)" />
+    </node>
+</launch>
