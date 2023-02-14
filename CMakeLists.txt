@@ -127,6 +127,7 @@ include_directories(
 add_library(${PROJECT_NAME}
   src/help_log.cpp
   src/help_marker.cpp
+  src/pure_pursuit.cpp
 )
 
 ## Add cmake target dependencies of the library
