@@ -54,7 +54,6 @@ void help_marker::arrow(std::string frame_id, std::string ns, int id, std::vecto
 //------------------------------------------------------------------------------
 //==============================================================================
 
-
 void help_marker::cube(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -87,7 +86,6 @@ void help_marker::cube(std::string frame_id, std::string ns, int id, geometry_ms
     _pub_marker.publish(msg_marker);
 }
 
-
 void help_marker::sphere(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -119,7 +117,6 @@ void help_marker::sphere(std::string frame_id, std::string ns, int id, geometry_
     //-----
     _pub_marker.publish(msg_marker);
 }
-
 
 void help_marker::cylinder(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
@@ -156,7 +153,6 @@ void help_marker::cylinder(std::string frame_id, std::string ns, int id, geometr
 //------------------------------------------------------------------------------
 //==============================================================================
 
-
 void help_marker::line_strip(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> points, float r, float g, float b, float a, float scale)
 {
     if (id == 0)
@@ -191,7 +187,6 @@ void help_marker::line_strip(std::string frame_id, std::string ns, int id, std::
     _pub_marker.publish(msg_marker);
 }
 
-
 void help_marker::line_list(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> points, float r, float g, float b, float a, float scale)
 {
     if (id == 0)
@@ -225,7 +220,6 @@ void help_marker::line_list(std::string frame_id, std::string ns, int id, std::v
     //-----
     _pub_marker.publish(msg_marker);
 }
-
 
 void help_marker::cube_list(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> positions, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
