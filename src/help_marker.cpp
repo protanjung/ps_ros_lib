@@ -7,11 +7,6 @@ help_marker::help_marker()
 //------------------------------------------------------------------------------
 //==============================================================================
 
-/**
- * @brief It is a public function that is used to initialize the help_marker class.
- *
- * @param NH The node handle of the node that is using this library.
- */
 void help_marker::init(ros::NodeHandle &NH)
 {
     /* Creating a publisher that publishes to the topic `/marker` of type `visualization_msgs::Marker`. */
@@ -21,24 +16,6 @@ void help_marker::init(ros::NodeHandle &NH)
 //------------------------------------------------------------------------------
 //==============================================================================
 
-/**
- * It publishes a marker of type ARROW to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param points a vector of two points, the first point is the start of the arrow, the second point is
- * the end of the arrow.
- * @param r red
- * @param g green
- * @param b blue
- * @param a frame_id: the frame in which the marker is to be displayed.
- * @param scale_shaft The diameter of the arrow shaft.
- * @param scale_head The size of the arrow head.
- *
- * @return Nothing is being returned.
- */
 void help_marker::arrow(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> points, float r, float g, float b, float a, float scale_shaft, float scale_head)
 {
     if (id == 0)
@@ -77,25 +54,6 @@ void help_marker::arrow(std::string frame_id, std::string ns, int id, std::vecto
 //------------------------------------------------------------------------------
 //==============================================================================
 
-/**
- * It publishes a marker of type CUBE to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param position The position of the marker in the frame_id frame.
- * @param orientation the orientation of the marker in the frame of reference
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale_x The length of the cube along the x axis.
- * @param scale_y The length of the cube along the y axis.
- * @param scale_z The length of the cube along the z axis.
- *
- * @return Nothing.
- */
 void help_marker::cube(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -128,25 +86,6 @@ void help_marker::cube(std::string frame_id, std::string ns, int id, geometry_ms
     _pub_marker.publish(msg_marker);
 }
 
-/**
- * It publishes a marker of type CUBE to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param position The position of the marker in the frame_id frame.
- * @param orientation the orientation of the marker
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale_x The radius of the sphere.
- * @param scale_y The radius of the sphere.
- * @param scale_z The radius of the sphere.
- *
- * @return Nothing is being returned.
- */
 void help_marker::sphere(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -179,25 +118,6 @@ void help_marker::sphere(std::string frame_id, std::string ns, int id, geometry_
     _pub_marker.publish(msg_marker);
 }
 
-/**
- * It publishes a marker of type CYLINDER to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param position The position of the marker in the frame_id frame.
- * @param orientation the orientation of the marker in the frame of reference
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale_x radius of the cylinder
- * @param scale_y radius of the cylinder
- * @param scale_z The height of the cylinder
- *
- * @return Nothing is being returned.
- */
 void help_marker::cylinder(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -233,22 +153,6 @@ void help_marker::cylinder(std::string frame_id, std::string ns, int id, geometr
 //------------------------------------------------------------------------------
 //==============================================================================
 
-/**
- * It publishes a marker of type LINE_STRIP to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param points a vector of geometry_msgs::Point objects
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale The thickness of the line.
- *
- * @return A visualization_msgs::Marker message.
- */
 void help_marker::line_strip(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> points, float r, float g, float b, float a, float scale)
 {
     if (id == 0)
@@ -283,22 +187,6 @@ void help_marker::line_strip(std::string frame_id, std::string ns, int id, std::
     _pub_marker.publish(msg_marker);
 }
 
-/**
- * It publishes a a marker of type LINE_LIST to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param points a vector of geometry_msgs::Point objects
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale The scale of the line.
- *
- * @return Nothing is being returned.
- */
 void help_marker::line_list(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> points, float r, float g, float b, float a, float scale)
 {
     if (id == 0)
@@ -333,22 +221,6 @@ void help_marker::line_list(std::string frame_id, std::string ns, int id, std::v
     _pub_marker.publish(msg_marker);
 }
 
-/**
- * It publishes a marker of type CUBE_LIST to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param positions a vector of geometry_msgs::Point objects
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale_x The scale of the cube in the x direction.
- * @param scale_y The scale of the cube in the y direction.
- * @param scale_z The scale of the cube in the z direction.
- */
 void help_marker::cube_list(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> positions, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
@@ -385,22 +257,6 @@ void help_marker::cube_list(std::string frame_id, std::string ns, int id, std::v
     _pub_marker.publish(msg_marker);
 }
 
-/**
- * It publishes a marker of type SPHERE_LIST to the topic /marker
- *
- * @param frame_id The frame in which the marker is to be displayed.
- * @param ns The namespace to which this marker belongs.
- * @param id The id of the marker. If the id is 0, the marker will not be published. If the id is
- * positive, the marker will be added. If the id is negative, the marker will be deleted.
- * @param positions a vector of geometry_msgs::Point objects
- * @param r red
- * @param g green
- * @param b blue
- * @param a alpha (transparency)
- * @param scale_x The scale of the sphere in the x direction.
- * @param scale_y The scale of the sphere in the y direction.
- * @param scale_z The scale of the sphere in the z direction.
- */
 void help_marker::sphere_list(std::string frame_id, std::string ns, int id, std::vector<geometry_msgs::Point> positions, float r, float g, float b, float a, float scale_x, float scale_y, float scale_z)
 {
     if (id == 0)
