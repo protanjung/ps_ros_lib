@@ -33,8 +33,8 @@ void pure_pursuit::updateGoal()
                                            powf(_currentRoute->at(i - 1).y - _currentPose->y, 2));
             float distanceForward = sqrtf(powf(_currentRoute->at(i - 0).x - _currentPose->x, 2) +
                                           powf(_currentRoute->at(i - 0).y - _currentPose->y, 2));
-            if (distanceBackward < _lookAheadDistance &&
-                distanceForward > _lookAheadDistance)
+            if (distanceBackward < lookAheadDistance &&
+                distanceForward > lookAheadDistance)
             {
                 statusNormal = 1;
                 indexNormal = i;
@@ -52,8 +52,8 @@ void pure_pursuit::updateGoal()
                                            powf(_currentRoute->at(i - 1).y - _currentPose->y, 2));
             float distanceForward = sqrtf(powf(_currentRoute->at(i - 0).x - _currentPose->x, 2) +
                                           powf(_currentRoute->at(i - 0).y - _currentPose->y, 2));
-            if (distanceBackward < _lookAheadDistance &&
-                distanceForward > _lookAheadDistance)
+            if (distanceBackward < lookAheadDistance &&
+                distanceForward > lookAheadDistance)
             {
                 statusNormal = 1;
                 indexNormal = i;
@@ -95,7 +95,7 @@ void pure_pursuit::updateGoal()
 
     float a = xStop_Minus_xStart * xStop_Minus_xStart + yStop_Minus_yStart * yStop_Minus_yStart;
     float b = 2 * (xStart_Minus_xPose * xStop_Minus_xStart + yStart_Minus_yPose * yStop_Minus_yStart);
-    float c = xStart_Minus_xPose * xStart_Minus_xPose + yStart_Minus_yPose * yStart_Minus_yPose - _lookAheadDistance * _lookAheadDistance;
+    float c = xStart_Minus_xPose * xStart_Minus_xPose + yStart_Minus_yPose * yStart_Minus_yPose - lookAheadDistance * lookAheadDistance;
 
     float discriminant = b * b - 4 * a * c;
 
@@ -131,6 +131,10 @@ void pure_pursuit::updateGoal()
 
 void pure_pursuit::updateICR()
 {
+    float alpha = atan2f(goalPositionY - _currentPose->y, goalPositionX - _currentPose->x) - _currentPose->theta;
+    icrRadius = lookAheadDistance / (2 * sinf(alpha));
+    icrPositionX = _currentPose->x + icrRadius * cosf(_currentPose->theta + M_PI_2);
+    icrPositionY = _currentPose->y + icrRadius * sinf(_currentPose->theta + M_PI_2);
 }
 
 void pure_pursuit::updateSteering()
@@ -144,8 +148,8 @@ void pure_pursuit::init(geometry_msgs::Pose2D *currentPose, std::vector<geometry
 {
     this->_currentPose = currentPose;
     this->_currentRoute = currentRoute;
-    this->_wheelBase = wheelBase;
-    this->_lookAheadDistance = lookAheadDistance;
+    this->wheelBase = wheelBase;
+    this->lookAheadDistance = lookAheadDistance;
 }
 
 //------------------------------------------------------------------------------
@@ -163,12 +167,12 @@ void pure_pursuit::setCurrentRoute(std::vector<geometry_msgs::Point> *currentRou
 
 void pure_pursuit::setWheelBase(float wheelBase)
 {
-    this->_wheelBase = wheelBase;
+    this->wheelBase = wheelBase;
 }
 
 void pure_pursuit::setLookAheadDistance(float lookAheadDistance)
 {
-    this->_lookAheadDistance = lookAheadDistance;
+    this->lookAheadDistance = lookAheadDistance;
 }
 
 //------------------------------------------------------------------------------
