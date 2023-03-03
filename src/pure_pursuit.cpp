@@ -139,6 +139,7 @@ void pure_pursuit::updateICR()
 
 void pure_pursuit::updateSteering()
 {
+    steeringAngle = atan2f(wheelBase, icrRadius);
 }
 
 //------------------------------------------------------------------------------
