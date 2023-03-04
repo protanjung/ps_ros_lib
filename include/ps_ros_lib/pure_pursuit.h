@@ -21,14 +21,14 @@ class pure_pursuit
 private:
     geometry_msgs::Pose2D *_currentPose;
     std::vector<geometry_msgs::Point> *_currentRoute;
-    float _wheelBase;
-    float _lookAheadDistance;
 
     void updateGoal();
     void updateICR();
     void updateSteering();
 
 public:
+    float wheelBase;
+    float lookAheadDistance;
     uint32_t goalIndexStart;
     uint32_t goalIndexStop;
     float goalPositionX;
