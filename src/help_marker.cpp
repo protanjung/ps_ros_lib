@@ -292,3 +292,37 @@ void help_marker::sphere_list(std::string frame_id, std::string ns, int id, std:
     //-----
     _pub_marker.publish(msg_marker);
 }
+
+//------------------------------------------------------------------------------
+
+void help_marker::text_view_facing(std::string frame_id, std::string ns, int id, geometry_msgs::Point position, geometry_msgs::Quaternion orientation, float r, float g, float b, float a, float scale, std::string text)
+{
+    if (id == 0)
+        return;
+
+    std_msgs::ColorRGBA color;
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.a = a;
+
+    visualization_msgs::Marker msg_marker;
+    //-----
+    msg_marker.header.frame_id = frame_id;
+    msg_marker.header.stamp = ros::Time::now();
+    msg_marker.ns = ns;
+    msg_marker.id = abs(id);
+    //-----
+    msg_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    msg_marker.action = id > 0 ? visualization_msgs::Marker::ADD : visualization_msgs::Marker::DELETE;
+    //-----
+    msg_marker.pose.position = position;
+    msg_marker.pose.orientation = orientation;
+    msg_marker.scale.z = scale;
+    msg_marker.color = color;
+    msg_marker.frame_locked = true;
+    //-----
+    msg_marker.text = text;
+    //-----
+    _pub_marker.publish(msg_marker);
+}
