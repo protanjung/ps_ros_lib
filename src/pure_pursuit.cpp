@@ -143,6 +143,57 @@ void pure_pursuit::updateSteering()
     steeringAngle = atan2f(2 * wheelBase * sinf(alpha), lookAheadDistance);
 }
 
+void pure_pursuit::updateIndexNearest()
+{
+    uint8_t statusNormal = 0;
+
+    //----------------------------------
+
+    float nearestDistance = sqrtf(powf(_currentRoute->at(goalIndexStop).x - _currentPose->x, 2) +
+                                  powf(_currentRoute->at(goalIndexStop).y - _currentPose->y, 2));
+
+    //----------------------------------
+
+    if (statusNormal == 0)
+    {
+        for (int i = goalIndexStop - 1; i >= 0; i--)
+        {
+
+            float distance = sqrtf(powf(_currentRoute->at(i).x - _currentPose->x, 2) +
+                                   powf(_currentRoute->at(i).y - _currentPose->y, 2));
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+            }
+            else
+            {
+                statusNormal = 1;
+                indexNearest = i;
+                break;
+            }
+        }
+    }
+
+    if (statusNormal == 0)
+    {
+        for (int i = _currentRoute->size() - 1; i > goalIndexStop; i--)
+        {
+            float distance = sqrtf(powf(_currentRoute->at(i).x - _currentPose->x, 2) +
+                                   powf(_currentRoute->at(i).y - _currentPose->y, 2));
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+            }
+            else
+            {
+                statusNormal = 1;
+                indexNearest = i;
+                break;
+            }
+        }
+    }
+}
+
 //------------------------------------------------------------------------------
 //==============================================================================
 
@@ -188,4 +239,5 @@ void pure_pursuit::updateAll()
     updateGoal();
     updateICR();
     updateSteering();
+    updateIndexNearest();
 }
