@@ -25,6 +25,7 @@ private:
     void updateGoal();
     void updateICR();
     void updateSteering();
+    void updateIndexNearest();
 
 public:
     float wheelBase;
@@ -37,6 +38,7 @@ public:
     float icrPositionX;
     float icrPositionY;
     float steeringAngle;
+    uint32_t indexNearest;
 
     pure_pursuit();
 
