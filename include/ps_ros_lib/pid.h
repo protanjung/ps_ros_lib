@@ -29,7 +29,10 @@ public:
 
     void init(double kp, double ki, double kd, double dt, double min_output = -1, double max_output = 1, double min_integral = -1, double max_integral = 1);
 
+    double update(double error);
+    double update(double error, float min_output, float max_output);
     double update(double setpoint, double input);
+    double update(double setpoint, double input, float min_output, float max_output);
 };
 
 #endif
