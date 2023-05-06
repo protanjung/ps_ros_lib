@@ -22,7 +22,7 @@ void pid::init(double kp, double ki, double kd, double dt, double min_output, do
 //------------------------------------------------------------------------------
 //==============================================================================
 
-double pid::update(double setpoint, double input)
+double pid::update(double error)
 {
     /* Calculating the time difference between the last time
     the function was called and the current time. */
@@ -41,7 +41,7 @@ double pid::update(double setpoint, double input)
     }
 
     /* Calculating the PID's each term. */
-    _error = setpoint - input;
+    _error = error;
     _propotional = _kp * _error;
     _derivative = _kd * (_error - _error_last) / _dt;
     _integral += _ki * _error * _dt;
@@ -65,4 +65,29 @@ double pid::update(double setpoint, double input)
     _error_last = _error;
 
     return _output;
+}
+
+double pid::update(double error, float min_output, float max_output)
+{
+    _min_output = min_output;
+    _max_output = max_output;
+    _min_integral = min_output;
+    _max_integral = max_output;
+
+    return update(error);
+}
+
+double pid::update(double setpoint, double input)
+{
+    return update(setpoint - input);
+}
+
+double pid::update(double setpoint, double input, float min_output, float max_output)
+{
+    _min_output = min_output;
+    _max_output = max_output;
+    _min_integral = min_output;
+    _max_integral = max_output;
+
+    return update(setpoint, input);
 }
